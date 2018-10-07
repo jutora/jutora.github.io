@@ -11,3 +11,27 @@ jobs:
       - run:
           name: Print the Current Time
           command: date
+      - run:
+          name: Update aptitude
+          command: apt-get update
+      - run:
+          name: Install git
+          command: apt-get install --yes git
+      - run:
+          name: Setup git
+          command: git config --global user.email "circleci@localhost"; git config --global user.name "Circle CI"
+      - run:
+          name: Added github hosts
+          command: mkdir ~/.ssh; ssh-keyscan github.com > ~/.ssh/known_hosts
+      - run:
+          name: Clone wiki page
+          command: git clone https://github.com/jutora/jutora.github.io.wiki.git wiki; cd wiki
+      - run:
+          name: Suck ones
+          command: touch test
+      - run:
+          name: Git added and commited
+          command: git add .; git commit -m "Updated" --author="Circle CI <noreply@localhost>"
+      - run:
+          name: Git push
+          command: git push origin master
